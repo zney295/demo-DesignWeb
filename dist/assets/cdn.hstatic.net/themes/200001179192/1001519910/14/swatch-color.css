@@ -1,0 +1,145 @@
+//.swatch-bg--color {background: #ffffff; border: 0.5px solid rgba(0,0,0,0.2);}
+/*21 mÃ u cÆ¡ báº£n*/
+.swatch-bg--color[data-color*='den'] {background: #000000;}
+.swatch-bg--color[data-color*='trang'] {background: #ffffff;}
+.swatch-bg--color[data-color*='xam'] {background: #737373;}
+.swatch-bg--color[data-color*='xanh'] {background: #334e6f;}
+.swatch-bg--color[data-color*='xanh-navy'] {background: #00005C;}
+.swatch-bg--color[data-color*='xanh-duong'] {background: #0000DF;}
+.swatch-bg--color[data-color*='xanh-luc'] {background: #006600;}
+.swatch-bg--color[data-color*='xanh-ngoc'] {background: #008080;}
+.swatch-bg--color[data-color*='xanh-olive'] {background: #808000;}
+.swatch-bg--color[data-color*='do'] {background: #d72800;}
+.swatch-bg--color[data-color*='vang'] {background: #fbd57b;}
+.swatch-bg--color[data-color*='nau'] {background: #330000;}
+.swatch-bg--color[data-color*='be'] {background: #c9bead;}
+.swatch-bg--color[data-color*='hong'] {background: #f2a4b2;}
+.swatch-bg--color[data-color*='cam'] {background: #f1690e;}
+.swatch-bg--color[data-color*='tim'] {background: #540084;}
+.swatch-bg--color[data-color*='ruou-vang'] {background: #620000;}
+.swatch-bg--color[data-color*='bac'] {background: #C0C0C0;}
+.swatch-bg--color[data-color*='reu'] {background: #2D411E;}
+.swatch-bg--color[data-color*='kem'] {background: #bbaf93;}
+.swatch-bg--color[data-color*='vang-kim'] {background: #FFD700;}
+.swatch-bg--color[data-color*='hoa-tiet'],
+.swatch-bg--color[data-color*='caro']{
+	background: url(/assets/file.hstatic.net/200000913793/file/icon-hoatiet.jpg) no-repeat;
+	background-size: 150% 150%;
+	background-position: center;	
+}
+
+/*list mÃ u custom mÃ£ hex*/
+.swatch-bg--color[data-color*='kaki'] {background: #c0ac83;}
+.swatch-bg--color[data-color*='xam-nhat'] {background: #A0A5AA;}
+.swatch-bg--color[data-color*='xam-dam'] {background: #464B50;}
+.swatch-bg--color[data-color*='xam-xanh-nhat'] {background: #EBEBF0;}
+.swatch-bg--color[data-color*='xam-dam-trung-binh'] {background: #595959;}
+.swatch-bg--color[data-color*='xam-trung-binh'] {background: #7F7F7F;}
+.swatch-bg--color[data-color*='xanh-dam'] {background: #004678;}
+.swatch-bg--color[data-color*='xanh-dem-bien'] {background: #233C78;}
+.swatch-bg--color[data-color*='xanh-duong-nhat'] {background: #8CBEFA;}
+.swatch-bg--color[data-color*='xanh-duong-trung-binh'] {background: #6496D2;}
+.swatch-bg--color[data-color*='xanh-duong-bien-sau'] {background: #16365D;}
+.swatch-bg--color[data-color*='xanh-duong-sang'] {background: #548DD4;}
+.swatch-bg--color[data-color*='xanh-duong-dem'] {background: #1B244E;}
+.swatch-bg--color[data-color*='xanh-duong-tim'] {background: #5046AF;}
+.swatch-bg--color[data-color*='xanh-duong-xanh-dam'] {background: #0F243E;}
+.swatch-bg--color[data-color*='xanh-duong-dam'] {background: #0564B9;}
+.swatch-bg--color[data-color*='xanh-luc-lam-dam'] {background: #1E5A78;}
+.swatch-bg--color[data-color*='xanh-ngoc-bien-sang'] {background: #14B4F0;}
+.swatch-bg--color[data-color*='xanh-ngoc-dam'] {background: #007D78;}
+.swatch-bg--color[data-color*='xanh-ngoc-bien-dam'] {background: #205867;}
+.swatch-bg--color[data-color*='xanh-o-liu'] {background: #76923C;}
+.swatch-bg--color[data-color*='xanh-o-liu-dam'] {background: #828732;}
+.swatch-bg--color[data-color*='xanh-co-vit'] {background: #00FFFF;}
+.swatch-bg--color[data-color*='xanh-bo'] {background: #73BE3C;}
+.swatch-bg--color[data-color*='xanh-reu'] {background: #2D411E;}
+.swatch-bg--color[data-color*='xanh-xam-nhat'] {background: #A5BED7;}
+.swatch-bg--color[data-color*='xanh-hai-quan-dam'] {background: #132D4E;}
+.swatch-bg--color[data-color*='xanh-da-granite'] {background: #244061;}
+.swatch-bg--color[data-color*='xanh-la-ma'] {background: #92D050;}
+.swatch-bg--color[data-color*='xanh-tim-den'] {background: #0F142D;}
+.swatch-bg--color[data-color*='xanh-la-sang'] {background: #73BE3C;}
+.swatch-bg--color[data-color*='xanh-bac-ha'] {background: #01EECF;}
+.swatch-bg--color[data-color*='do-tuoi'] {background: #D20000;}
+.swatch-bg--color[data-color*='do-sang'] {background: #FF3232;}
+.swatch-bg--color[data-color*='do-nguyen'] {background: #FF0000;}
+.swatch-bg--color[data-color*='do-gach'] {background: #953734;}
+.swatch-bg--color[data-color*='do-do'] {background: #531713;}
+.swatch-bg--color[data-color*='do-ruou'] {background: #5a1724;}
+.swatch-bg--color[data-color*='vang-kem'] {background: #FAF0BE;}
+.swatch-bg--color[data-color*='vang-dat'] {background: #A68B58;}
+.swatch-bg--color[data-color*='vang-chanh'] {background: #FFFF00;}
+.swatch-bg--color[data-color*='vang-dam'] {background: #F5AA0F;}
+.swatch-bg--color[data-color*='vang-chanh-nhat'] {background: #DCF555;}
+.swatch-bg--color[data-color*='vang-kem-sang'] {background: #FFFEB5;}
+.swatch-bg--color[data-color*='nau-be-nhat'] {background: #BEA082;}
+.swatch-bg--color[data-color*='nau-nhat'] {background: #7F7748;}
+.swatch-bg--color[data-color*='nau-dat'] {background: #966E5A;}
+.swatch-bg--color[data-color*='nau-dam'] {background: #32140A;}
+.swatch-bg--color[data-color*='nau-go'] {background: #4B3728;}
+.swatch-bg--color[data-color*='nau-gach'] {background: #A04128;}
+.swatch-bg--color[data-color*='nau-socola-dam'] {background: #9B4906;}
+.swatch-bg--color[data-color*='nau-do-xam'] {background: #725959;}
+.swatch-bg--color[data-color*='be-hong'] {background: #BE9682;}
+.swatch-bg--color[data-color*='hong-dam'] {background: #FA0078;}
+.swatch-bg--color[data-color*='hong-phan-nhat'] {background: #D99694;}
+.swatch-bg--color[data-color*='hong-do'] {background: #DC285A;}
+.swatch-bg--color[data-color*='hong-sang'] {background: #F99EB3;}
+.swatch-bg--color[data-color*='hong-nhat'] {background: #FA96A0;}
+.swatch-bg--color[data-color*='hong-neon'] {background: #FF64C8;}
+.swatch-bg--color[data-color*='cam-chay'] {background: #F06919;}
+.swatch-bg--color[data-color*='cam-dam'] {background: #E15D0F;}
+.swatch-bg--color[data-color*='cam-sang'] {background: #F27931;}
+.swatch-bg--color[data-color*='tim-dam'] {background: #AA2DAA;}
+.swatch-bg--color[data-color*='tim-tham'] {background: #3C003C;}
+.swatch-bg--color[data-color*='tim-nhat'] {background: #B969E1;}
+.swatch-bg--color[data-color*='kem-nhat'] {background: #FAF0C8;}
+.swatch-bg--color[data-color*='bien'] {background: #14B4F0;}
+
+/*.swatch-bg--color[data-color*=''] {background: ;}*/
+
+.swatch-bg--color[data-color*='den'] {background: #000000;}
+
+.swatch-bg--color[data-color*='trang'] {background: #ffffff;}
+
+.swatch-bg--color[data-color*='xam'] {background: #737373;}
+
+.swatch-bg--color[data-color*='xanh'] {background: #00005C;}
+
+.swatch-bg--color[data-color*='do'] {background: #ff0000;}
+
+.swatch-bg--color[data-color*='vang'] {background: #ffde00;}
+
+.swatch-bg--color[data-color*='nau'] {background: #330000;}
+
+.swatch-bg--color[data-color*='be'] {background: #F5F5DC;}
+
+.swatch-bg--color[data-color*='hong'] {background: #f2a4b2;}
+
+.swatch-bg--color[data-color*='cam'] {background: #f1690e;}
+
+.swatch-bg--color[data-color*='tim'] {background: #540084;}
+
+.swatch-bg--color[data-color*='xanh-ngoc'] {background: #008080;}
+
+.swatch-bg--color[data-color*='ruou-vang'] {background: #620000;}
+
+.swatch-bg--color[data-color*='bac'] {background: #C0C0C0;}
+
+.swatch-bg--color[data-color*='xanh-olive'] {background: #808000;}
+
+.swatch-bg--color[data-color*='hong-cam'] {background: #f5a623;}
+
+
+
+
+.swatch-bg--color[data-color*='hoa-tiet'] {
+  background-image: url(/assets/file.hstatic.net/200000913793/file/icon-hoatiet.jpg);
+  background-size: 150% 150%;
+	background-position: center;	
+  background-repeat: no-repeat;
+}
+
+
+

@@ -1,0 +1,11 @@
+{
+  "name": "mandy-crimson-local-frontend",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Editable local snapshot of the public Mandy Crimson storefront",
+  "scripts": {
+    "start": "python server.py",
+    "dev": "python server.py",
+    "refresh": "python scripts/capture_data.py && python scripts/mirror.py && python scripts/apply_feedback.py && python scripts/apply_autumn_images.py && python scripts/build_bow_comparison.py"
+  }
+}

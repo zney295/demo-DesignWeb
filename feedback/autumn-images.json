@@ -1,0 +1,48 @@
+{
+  "source_directory": "C:\\Users\\HP\\Downloads\\IgAutumn",
+  "photos": {
+    "leaves": {
+      "original": "end of autumn but it’s 2022.jpg",
+      "local": "/assets/custom/autumn/leaves.jpg"
+    },
+    "wardrobe": {
+      "original": "end of autumn but it’s 2022 (1).jpg",
+      "local": "/assets/custom/autumn/wardrobe.jpg"
+    },
+    "park": {
+      "original": "end of autumn but it’s 2022 (2).jpg",
+      "local": "/assets/custom/autumn/park.jpg"
+    },
+    "bookshop": {
+      "original": "end of autumn but it’s 2022 (3).jpg",
+      "local": "/assets/custom/autumn/bookshop.jpg"
+    },
+    "kitchen": {
+      "original": "end of autumn but it’s 2022 (4).jpg",
+      "local": "/assets/custom/autumn/kitchen.jpg"
+    },
+    "lockets": {
+      "original": "end of autumn but it’s 2022 (5).jpg",
+      "local": "/assets/custom/autumn/lockets.jpg"
+    }
+  },
+  "placements": {
+    "hero": [
+      "leaves",
+      "park",
+      "bookshop"
+    ],
+    "new_arrivals": "wardrobe",
+    "detail_banner": "lockets",
+    "lookbook": [
+      "wardrobe",
+      "kitchen",
+      "bookshop",
+      "park"
+    ],
+    "about_us": [
+      "bookshop",
+      "kitchen"
+    ]
+  }
+}

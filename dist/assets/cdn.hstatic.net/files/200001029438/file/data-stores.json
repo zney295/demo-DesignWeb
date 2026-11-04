@@ -1,0 +1,94 @@
+﻿{
+    "cuahang": [
+        {
+            "shop_name": "Cửa hàng Hồng Bàng",
+            "province": "Hồ Chí Minh",
+            "ward": "Phường 11",
+            "address": "Số 490 Hồng Bàng, Phường 16, Quận 11, Thành phố Hồ Chí Minh",
+            "time": "8h30 - 20h00 (kể cả CN và ngày lễ)",
+            "phone": "0987654321",
+            "map": "<iframe src=\"https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3919.7492352348054!2d106.64790269999999!3d10.753799599999997!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x577e72ee71341d25!2zMTDCsDQ1JzEzLjciTiAxMDbCsDM4JzUyLjUiRQ!5e0!3m2!1svi!2s!4v1654097812279!5m2!1svi!2s\" width=\"600\" height=\"450\" style=\"border:0;\" allowfullscreen=\"\" loading=\"lazy\" referrerpolicy=\"no-referrer-when-downgrade\"></iframe>"
+        },
+        {
+            "shop_name": "Cửa hàng Lê Đại Hành",
+            "province": "Hồ Chí Minh",
+            "ward": "Phường 11",
+            "address": "Số 182 Lê Đại Hành, Phường 15, Quận 11, Thành phố Hồ Chí Minh",
+            "time": "8h30 - 20h00 (kể cả CN và ngày lễ)",
+            "phone": "0987654322",
+            "map": "<iframe src=\"https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3919.6177130569463!2d106.6541090152651!3d10.763917262366727!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31752eec413c9d8d%3A0xfd53ac27a1acd021!2zMTgyIMSQLiBMw6ogxJDhuqFpIEjDoG5oLCBQaMaw4budbmcgMTUsIFF14bqtbiAxMSwgVGjDoG5oIHBo4buRIEjhu5MgQ2jDrSBNaW5oLCBWaWV0bmFt!5e0!3m2!1sen!2s!4v1654138747129!5m2!1sen!2s\" width=\"600\" height=\"450\" style=\"border:0;\" allowfullscreen=\"\" loading=\"lazy\" referrerpolicy=\"no-referrer-when-downgrade\"></iframe>"
+        },
+        {
+            "shop_name": "Cửa hàng Lạc Long Quân",
+            "province": "Hồ Chí Minh",
+            "ward": "Phường 11",
+            "address": "Số 96 Lạc Long Quân, Phường 3, Quận 11, Thành phố Hồ Chí Minh",
+            "time": "8h30 - 20h00 (kể cả CN và ngày lễ)",
+            "phone": "0987654323",
+            "map": "<iframe src=\"https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3919.6813990389396!2d106.63529432803386!3d10.759019237950291!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31752e8546724bb3%3A0x47c8af4fe3223006!2zOTYgTOG6oWMgTG9uZyBRdcOibiwgUGjGsOG7nW5nIDMsIFF14bqtbiAxMSwgVGjDoG5oIHBo4buRIEjhu5MgQ2jDrSBNaW5oLCBWaWV0bmFt!5e0!3m2!1sen!2s!4v1654139500473!5m2!1sen!2s\" width=\"600\" height=\"450\" style=\"border:0;\" allowfullscreen=\"\" loading=\"lazy\" referrerpolicy=\"no-referrer-when-downgrade\"></iframe>"
+        },
+        {
+            "shop_name": "Cửa hàng Tân Phú 1",
+            "province": "Hồ Chí Minh",
+            "ward": "Phường Tân Phú",
+            "address": "Số 43 Nguyễn Sơn, Phú Thạnh, Tân Phú, Thành phố Hồ Chí Minh",
+            "time": "8h30 - 20h00 (kể cả CN và ngày lễ)",
+            "phone": "0987654322",
+            "map": "<iframe src=\"https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3919.396505854494!2d106.63211!3d10.780913!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x6473fd0cc5d2c34e!2zMTDCsDQ2JzUxLjMiTiAxMDbCsDM3JzU1LjYiRQ!5e0!3m2!1svi!2s!4v1654097646608!5m2!1svi!2s\" width=\"600\" height=\"450\" style=\"border:0;\" allowfullscreen=\"\" loading=\"lazy\" referrerpolicy=\"no-referrer-when-downgrade\"></iframe>"
+        },
+        {
+            "shop_name": "Cửa hàng số 245 Võ Văn Ngân",
+            "province": "Hồ Chí Minh",
+            "ward": "Phường Thủ Đức",
+            "address": "Số 245 Võ Văn Ngân, Phường Linh Chiểu, TP. Thủ Đức, TP. Hồ Chí Minh",
+            "time": "8h30 - 22h00 (kể cả CN và ngày lễ)",
+            "phone": "0987654322",
+            "map": "<iframe src=\"https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3918.485022259543!2d106.76189742354217!3d10.850666367550431!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x317527a1de535e71%3A0x99305b6c26178d3e!2zMjQ1IMSQLiBWw7UgVsSDbiBOZ8OibiwgTGluaCBDaGnhu4N1LCBUaOG7pyDEkOG7qWMsIFRow6BuaCBwaOG7kSBI4buTIENow60gTWluaCwgVmnhu4d0IE5hbQ!5e0!3m2!1svi!2s!4v1654097833380!5m2!1svi!2s\" width=\"600\" height=\"450\" style=\"border:0;\" allowfullscreen=\"\" loading=\"lazy\" referrerpolicy=\"no-referrer-when-downgrade\"></iframe>"
+        },
+        {
+            "shop_name": "Cửa hàng Số 61 Lê Văn Lương",
+            "province": "Hà Nội",
+            "ward": "Phường Cầu Giấy",
+            "address": "Số 61 Lê Văn Lương, P. Trung Hòa, Q. Cầu Giấy, TP. Hà Nội",
+            "time": "8h30 - 22h00 (kể cả CN và ngày lễ)",
+            "phone": "0987654323",
+            "map": "<iframe src=\"https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3724.7767242293558!2d105.79739051490422!3d21.001585386013094!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3135aca4a7a1b81b%3A0x378d664c3d90c6c1!2zNjEgxJAuIEzDqiBWxINuIEzGsMahbmcsIE5ow6JuIENow61uaCwgVGhhbmggWHXDom4sIEjDoCBO4buZaSwgVmnhu4d0IE5hbQ!5e0!3m2!1svi!2s!4v1654097856142!5m2!1svi!2s\" width=\"600\" height=\"450\" style=\"border:0;\" allowfullscreen=\"\" loading=\"lazy\" referrerpolicy=\"no-referrer-when-downgrade\"></iframe>"
+        },
+        {
+            "shop_name": "Cửa hàng Tân Phú 2",
+            "province": "Hồ Chí Minh",
+            "ward": "Phường Tân Phú",
+            "address": "Số 80 Trịnh Đình Trọng, P. Phú Trung, Q. Tân Phú, TP. Hồ Chí Minh",
+            "time": "8h30 - 21h00 (kể cả CN và ngày lễ)",
+            "phone": "0987654324",
+            "map": "<iframe src=\"https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2731.743798786364!2d106.64317691290597!3d10.775913021971132!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31752ebc7249d575%3A0x23c7897f9006a94b!2zODAgVHLhu4tuaCDEkMOsbmggVHLhu41uZywgUGjDuiBUcnVuZywgVMOibiBQaMO6LCBUaMOgbmggcGjhu5EgSOG7kyBDaMOtIE1pbmgsIFZp4buHdCBOYW0!5e0!3m2!1svi!2s!4v1654097879292!5m2!1svi!2s\" width=\"600\" height=\"450\" style=\"border:0;\" allowfullscreen=\"\" loading=\"lazy\" referrerpolicy=\"no-referrer-when-downgrade\"></iframe>"
+        },
+        {
+            "shop_name": "Cửa hàng Số 11 Điện Biên Phủ",
+            "province": "Hà Nội",
+            "ward": "Phường Hoàn Kiếm",
+            "address": "Số 11 Điện Biên Phủ, Điện Bàn, Hoàn Kiếm, Hà Nội",
+            "time": "8h30 - 21h00 (kể cả CN và ngày lễ)",
+            "phone": "0987654325",
+            "map": "<iframe src=\"https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3724.08086888288!2d105.84192999999999!3d21.029449999999997!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xfeef2e78a32a0b97!2zMjHCsDAxJzQ2LjAiTiAxMDXCsDUwJzMxLjAiRQ!5e0!3m2!1svi!2s!4v1654098049079!5m2!1svi!2s\" width=\"600\" height=\"450\" style=\"border:0;\" allowfullscreen=\"\" loading=\"lazy\" referrerpolicy=\"no-referrer-when-downgrade\"></iframe>"
+        },
+        {
+            "shop_name": "Cửa hàng Số 160 Tân Kỳ Tân Quý",
+            "province": "Hồ Chí Minh",
+            "ward": "Phường Tân Phú",
+            "address": "160 Tân Kỳ Tân Quý, Tân Quý, Tân Phú, Thành phố Hồ Chí Minh",
+            "time": "8h30 - 21h00 (kể cả CN và ngày lễ)",
+            "phone": "0987654326",
+            "map": "<iframe src=\"https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3919.135193995022!2d106.62295999999999!3d10.800956!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x3d68ae8aedc16def!2zMTDCsDQ4JzAzLjQiTiAxMDbCsDM3JzIyLjciRQ!5e0!3m2!1svi!2s!4v1654153596492!5m2!1svi!2s\" width=\"600\" height=\"450\" style=\"border:0;\" allowfullscreen=\"\" loading=\"lazy\" referrerpolicy=\"no-referrer-when-downgrade\"></iframe>"
+        },
+        {
+            "shop_name": "Cửa hàng Lũy Bán Bích",
+            "province": "Hồ Chí Minh",
+            "ward": "Phường Tân Phú",
+            "address": "452 Lũy Bán Bích, Hoà Thanh, Tân Phú, Thành phố Hồ Chí Minh",
+            "time": "8h30 - 20h00 (kể cả CN và ngày lễ)",
+            "phone": "0987654327",
+            "map": "<iframe src=\"https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3919.425992747733!2d106.63532000000001!3d10.778649!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x6f748fece2dc8830!2zMTDCsDQ2JzQzLjEiTiAxMDbCsDM4JzA3LjIiRQ!5e0!3m2!1svi!2s!4v1654153738528!5m2!1svi!2s\" width=\"600\" height=\"450\" style=\"border:0;\" allowfullscreen=\"\" loading=\"lazy\" referrerpolicy=\"no-referrer-when-downgrade\"></iframe>"
+        }
+    ]
+}

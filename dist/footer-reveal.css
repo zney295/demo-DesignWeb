@@ -1,0 +1,106 @@
+/* Enter, hold the complete frame, then let the footer pass over the photograph. */
+.footer-reveal {
+  --reveal-bow-width: clamp(88px, 8vw, 112px);
+  --reveal-pin-top: calc(var(--reveal-bow-width) * .3 + 10px);
+  --reveal-photo-height: calc(100vh - var(--reveal-pin-top));
+  --reveal-photo-height: calc(100svh - var(--reveal-pin-top));
+  position: relative;
+  display: block;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+  background: #fff;
+  scroll-margin-top: 0;
+}
+.footer-reveal__bow {
+  position: sticky;
+  top: 10px;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: calc(var(--reveal-bow-width) * .6);
+  margin-bottom: calc(var(--reveal-bow-width) * -.3);
+  pointer-events: none;
+}
+.footer-reveal__bow img {
+  display: block;
+  width: var(--reveal-bow-width);
+  height: 100%;
+  object-fit: cover;
+}
+.footer-reveal__window {
+  position: sticky;
+  top: var(--reveal-pin-top);
+  z-index: 0;
+  height: var(--reveal-photo-height);
+  overflow: clip;
+}
+.footer-reveal__background {
+  position: absolute;
+  inset: 0;
+  background: url('/assets/custom/girlhood-seaside.jpg') 50% 65% / cover no-repeat;
+  pointer-events: none;
+}
+.footer-reveal__hold {
+  height: clamp(220px, 45vh, 480px);
+  height: clamp(220px, 45svh, 480px);
+  pointer-events: none;
+}
+.main-footer {
+  position: relative;
+  z-index: 30;
+  margin: 0;
+}
+body.has-smart-header .main-header { min-height: var(--reveal-header-height, 86px) !important; }
+body.has-smart-header .main-header .main-header--inner {
+  position: fixed !important;
+  inset: 0 0 auto !important;
+  z-index: 40 !important;
+  background: #fff;
+  opacity: 1 !important;
+  visibility: visible !important;
+  transform: none !important;
+  transition: transform 220ms ease, visibility 0s !important;
+}
+body.has-smart-header.is-header-hidden .main-header .main-header--inner {
+  transform: translateY(-105%) !important;
+  visibility: hidden !important;
+  pointer-events: none;
+  transition: transform 220ms ease, visibility 0s linear 220ms !important;
+}
+.checkout-header { position: sticky; top: 0; z-index: 40; }
+body.has-checkout-header { padding-top: var(--reveal-header-height, 66px); }
+body.has-smart-header .checkout-header {
+  position: fixed;
+  inset: 0 0 auto;
+  transform: translateY(0);
+  visibility: visible;
+  transition: transform 220ms ease, visibility 0s;
+}
+body.has-smart-header.is-header-hidden .checkout-header {
+  transform: translateY(-105%);
+  visibility: hidden;
+  pointer-events: none;
+  transition: transform 220ms ease, visibility 0s linear 220ms;
+}
+.footer-reveal--simple {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 32px;
+  min-height: 220px;
+  padding: 40px 24px;
+  background: #f2f2f2;
+  color: #35252e;
+}
+.footer-reveal--simple a { color: inherit; text-decoration: none; }
+@media (max-width: 600px) {
+  .footer-reveal__background { background-position: 35% 65%; }
+}
+@media (prefers-reduced-motion: reduce) {
+  body.has-smart-header .main-header .main-header--inner { transition: none !important; }
+}
