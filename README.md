@@ -20,6 +20,8 @@ So sánh nơ: **http://127.0.0.1:4173/** giữ bản hiện tại; **http://127.
 
 Nhấn lại nút của bản đang xem để quay về ảnh. Khi đổi sang bản còn lại lúc đang xem footer, vị trí so sánh vẫn ở footer.
 
+Ảnh trang 2 nằm trong section riêng, độc lập với footer, giữ đúng tỷ lệ gốc và cuộn theo trang. Footer có đủ chiều cao để cuộn hết ảnh khỏi vùng nhìn; chỉ nơ tiếp tục gắn vào header. CSS/JS nền cũ không được tải ở trang 2.
+
 - `dist/index.html`: trang chủ.
 - `dist/custom.css`: CSS tùy chỉnh, được nạp sau CSS gốc trên mọi trang.
 - `dist/footer-reveal.css`, `dist/footer-reveal.js`: khung ảnh biển responsive, nơ ghim header và footer trượt lên trên ảnh. Ảnh gốc ở `dist/assets/custom/girlhood-seaside.jpg`.

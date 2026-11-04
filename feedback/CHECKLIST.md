@@ -90,3 +90,9 @@ Kiểm tra: cả hai URL và CSS/JS trả HTTP 200; JavaScript/Python qua kiểm
 Cuộn ngược trở lại trước ảnh: nơ được trả về origin, tâm nơ và mép ảnh cùng ở y≈400.158px, vẫn chỉ có một nơ. Đổi bản ở footer giữ đúng anchor footer; nhấn bản đang chọn quay về ảnh. Bước refresh giữ nguyên HTML trang 2 và không làm lọt bộ nút so sánh vào Coming soon. Ảnh trước khi ghim: `bow-page-2-before-pin.jpg`.
 
 Bản hẹp: không tràn ngang, ảnh tải đúng bản gốc 1280×720, nơ vẫn ở trong header và top nơ = bottom header ≈64px. Ảnh đối chiếu: `bow-page-2-footer-mobile.jpg`, `bow-page-2-before-pin.jpg`. Bản 1 đang được xem để đối chiếu: `bow-page-1-current.jpg`.
+
+## Trang 2 — ảnh rời cuộn hết khỏi màn hình
+
+Tách thành `.bow-photo-section` chứa `<img class="bow-comparison__photo">` với `position: static`, `width:100%`, `height:auto`; footer là section kế tiếp độc lập. Trang 2 không tải `footer-reveal.css`/`footer-reveal.js` và không còn node window/background/hold của hiệu ứng nền. Bộ asset so sánh có phiên bản `?v=3` để tải lại thay đổi.
+
+Footer dùng chiều cao tối thiểu bằng viewport trừ header, giúp cuộn hết ảnh ở cửa sổ cao trong khi giữ bố cục footer. Kiểm tra ở viewport CSS 1143×803: ảnh hiển thị 1129.17×635.16 đúng tỷ lệ 16:9; khi tới footer, bottom ảnh ≈85.91px nằm sau header bottom ≈85.99px. Bản hẹp sau khi trả viewport: bottom ảnh ≈63.82px, header bottom ≈64px, nơ vẫn là con của header. Ảnh đối chiếu cuối: `page-2-photo-scrolled-out.jpg`.
