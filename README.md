@@ -66,3 +66,18 @@ python scripts/build_bow_comparison.py
 ```
 
 `mirror.py` ưu tiên bộ nhớ đệm trong `source/`; để lấy HTML/CSS/JS mới, di chuyển bản cache tương ứng ra khỏi `source/` trước khi chạy. Danh sách sitemap ban đầu nằm tại `source/sitemap-urls.json`.
+
+## Website công khai và chỉnh sửa từ điện thoại
+
+GitHub Pages: **https://zney295.github.io/demo-DesignWeb/**. Workflow `.github/workflows/pages.yml` tự xuất bản khi push vào `main`. `scripts/build_pages.py` tạo `_site/` từ `dist/`, điều chỉnh đường dẫn cho project Pages và giữ nguyên các file dùng khi chạy Python cục bộ.
+
+Pages phục vụ bản frontend tĩnh. Service worker trong `scripts/pages/` cung cấp catalog, tìm kiếm và giỏ hàng demo; giỏ được lưu riêng trong trình duyệt và không tạo đơn hàng thật. Đăng nhập, gửi biểu mẫu và thanh toán chưa có backend. Công cụ upload ảnh `/__editor/` chỉ dùng trên server Python cục bộ, không được xuất bản trên Pages.
+
+Kiểm tra bản xuất trước khi push:
+
+```sh
+python scripts/build_pages.py --base-path /demo-DesignWeb
+node --test scripts/pages/pages.test.cjs
+```
+
+Trên điện thoại, đăng nhập cùng tài khoản ChatGPT, chọn **Codex → Cloud → demo-DesignWeb**, yêu cầu sửa code rồi commit/push vào `main`. Workflow Pages sẽ kiểm tra và triển khai bản mới; có thể theo dõi trong tab **Actions** của repo. Repo public cho phép mọi người đọc; quyền ghi vẫn thuộc tài khoản và kết nối GitHub được cấp quyền.
