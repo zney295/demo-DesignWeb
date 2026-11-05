@@ -16,11 +16,11 @@ Cũng có thể chạy `npm start`. Mở **http://127.0.0.1:4173**. Dừng bằn
 
 Đã áp dụng feedback Canva 6 trang: xem `feedback/CHECKLIST.md`. Thay ảnh dấu cộng tại **http://127.0.0.1:4173/__editor/**. Giao diện checkout thử ở `/checkout`, trang Coming soon ở `/pages/coming-soon`. Các sửa đổi dùng `custom.css` và `custom.js`.
 
-So sánh nơ: **http://127.0.0.1:4173/** giữ bản hiện tại; **http://127.0.0.1:4173/page-2** là bản thử nơ đính vào top bar. Trang 2 dùng ảnh biển riêng có đủ tỷ lệ gốc; khi nơ tới header, cùng node nơ được gắn vào header và giữ tới footer. Dùng các nút so sánh ở góc dưới để đổi bản hoặc tới footer. Thay đổi này đang giới hạn ở trang thử, chưa áp đại trà cách ghim mới.
+So sánh nơ: **http://127.0.0.1:4173/** giữ bản hiện tại; **http://127.0.0.1:4173/page-2** là bản thử nơ đính vào top bar. Trang 2 dùng ảnh biển riêng có đủ tỷ lệ gốc. Nơ ghim bằng CSS sticky tại mép dưới header, thu gọn còn 40px trên bản hẹp / 48px trên desktop và giữ tới footer. Dùng các nút so sánh ở góc dưới để đổi bản hoặc tới footer. Thay đổi này đang giới hạn ở trang thử, chưa áp đại trà cách ghim mới.
 
 Nhấn lại nút của bản đang xem để quay về ảnh. Khi đổi sang bản còn lại lúc đang xem footer, vị trí so sánh vẫn ở footer.
 
-Ảnh trang 2 nằm trong section riêng, độc lập với footer, giữ đúng tỷ lệ gốc và cuộn theo trang. Footer có đủ chiều cao để cuộn hết ảnh khỏi vùng nhìn; chỉ nơ tiếp tục gắn vào header. CSS/JS nền cũ không được tải ở trang 2.
+Ảnh trang 2 nằm trong section riêng, độc lập với footer, giữ đúng tỷ lệ gốc và cuộn theo trang. Footer có đủ chiều cao để cuộn hết ảnh khỏi vùng nhìn. Một wrapper chung giữ phạm vi sticky cho nơ qua cả ảnh lẫn footer, không di chuyển node khi cuộn. CSS/JS nền cũ không được tải ở trang 2. Builder thêm guard vào `general.js` để tắt bộ điều khiển header trùng của theme chỉ trên trang 2.
 
 - `dist/index.html`: trang chủ.
 - `dist/custom.css`: CSS tùy chỉnh, được nạp sau CSS gốc trên mọi trang.

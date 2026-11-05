@@ -11,7 +11,12 @@
     let lastY = Math.max(0, scrollY);
     let direction = 0;
     let travel = 0;
+    let headerHidden;
+    const overlayIsOpen = () => document.body.matches('.open-menumobile, .open-search, .open-sidebar-cart');
+    let overlayOpen = overlayIsOpen();
     const setHeaderHidden = hidden => {
+      if (hidden === headerHidden) return;
+      headerHidden = hidden;
       document.body.classList.toggle('is-header-hidden', hidden);
       if (header) header.inert = hidden;
     };
@@ -38,9 +43,12 @@
         direction = nextDirection;
       }
       lastY = y;
-      const interacting = document.body.matches('.open-menumobile, .open-search, .open-sidebar-cart') ||
+      const interacting = overlayOpen ||
         (header?.contains(document.activeElement) && document.activeElement.matches(':focus-visible'));
-      if (interacting || y < height) setHeaderHidden(false);
+      // Keep the bar stable throughout this scene. Its lower edge and the
+      // photograph's upper edge are the same line, with the bow centered on it.
+      const sceneAtHeader = box.top <= pin + 160 && box.bottom > 0;
+      if (interacting || y < height || sceneAtHeader) setHeaderHidden(false);
       else if (direction < 0 && travel >= 80) setHeaderHidden(false);
       else if (readingPhoto && direction >= 0) setHeaderHidden(true);
       else if (direction > 0 && travel >= 32 && y > height * 2) setHeaderHidden(true);
@@ -61,7 +69,10 @@
     }, {passive: true});
     addEventListener('pageshow', scroll);
     addEventListener('focusin', scroll);
-    new MutationObserver(scroll).observe(document.body, {attributes: true, attributeFilter: ['class']});
+    new MutationObserver(() => {
+      const next = overlayIsOpen();
+      if (next !== overlayOpen) {overlayOpen = next; scroll();}
+    }).observe(document.body, {attributes: true, attributeFilter: ['class']});
     document.body.classList.add('has-smart-header');
     document.body.classList.toggle('has-checkout-header', !!header?.classList.contains('checkout-header'));
     setHeaderHidden(lastY > (header?.offsetHeight || 0) * 2);

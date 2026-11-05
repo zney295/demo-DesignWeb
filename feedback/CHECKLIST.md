@@ -96,3 +96,17 @@ Bản hẹp: không tràn ngang, ảnh tải đúng bản gốc 1280×720, nơ v
 Tách thành `.bow-photo-section` chứa `<img class="bow-comparison__photo">` với `position: static`, `width:100%`, `height:auto`; footer là section kế tiếp độc lập. Trang 2 không tải `footer-reveal.css`/`footer-reveal.js` và không còn node window/background/hold của hiệu ứng nền. Bộ asset so sánh có phiên bản `?v=3` để tải lại thay đổi.
 
 Footer dùng chiều cao tối thiểu bằng viewport trừ header, giúp cuộn hết ảnh ở cửa sổ cao trong khi giữ bố cục footer. Kiểm tra ở viewport CSS 1143×803: ảnh hiển thị 1129.17×635.16 đúng tỷ lệ 16:9; khi tới footer, bottom ảnh ≈85.91px nằm sau header bottom ≈85.99px. Bản hẹp sau khi trả viewport: bottom ảnh ≈63.82px, header bottom ≈64px, nơ vẫn là con của header. Ảnh đối chiếu cuối: `page-2-photo-scrolled-out.jpg`.
+
+## Trang 2 — thu gọn top bar và tối ưu chuyển động nơ
+
+Thay cơ chế di chuyển node bằng một nơ sticky cố định trong wrapper chung của ảnh và footer. Ảnh vẫn là `<img>` độc lập cuộn bình thường. Nơ giữ tâm tại mép ảnh khi đi vào, sau đó thu gọn theo 96px cuộn cuối trước header, giữ ở mép bar qua footer. Kích thước khi ghim: 40px ở bản hẹp, 48px từ breakpoint desktop. Bỏ dải nền trắng thêm dưới header; chiều cao bar gốc giữ 64/86px. Khi nhảy nhanh qua điểm ghim, header không phải đợi transition hoàn tất.
+
+Controller cache hình học khi resize/load/font thay đổi, không đo offset/getBoundingClientRect trong mỗi scroll frame; gom sự kiện vào một requestAnimationFrame, chỉ cập nhật transform của ảnh nơ khi scale thực sự đổi. Observer class chỉ quan tâm menu/search/cart, không tự tạo vòng RAF từ class của controller. Builder thêm guard cho `headerJS.scrollFixedHeader` của theme để tránh hai controller chạy đồng thời ở bản 2. Asset so sánh dùng `?v=4`.
+
+Kiểm tra controller bằng Node VM với code thực: 100 sự kiện scroll gom thành một frame; nhảy nhanh qua điểm ghim và cuộn ngược cập nhật ngay frame kế tiếp; 100 scroll frame không phát sinh phép đo layout; class tự thay đổi không tạo frame lặp; resize cập nhật kích thước ghim đúng. Trình duyệt: trước/sau cuộn nhanh header đều 64px; nơ 88→40px; node vẫn ở `.bow-comparison__region`; không còn các class hSticky của controller theme. Ảnh vẫn cuộn hết khỏi vùng nhìn.
+
+## Nơ không bị top bar hoặc footer che
+
+Ở bản 1 và các trang dùng `footer-reveal`, nơ có lớp 60, cao hơn header 40 và footer 30. Tâm nơ và mép trên ảnh dùng chung một đường ghim theo chiều cao header. Header giữ hiện khi đi vào vùng ảnh/footer để tránh che nơ lúc xuất hiện lại; observer chỉ phản ứng khi menu/search/cart đổi trạng thái.
+
+Trình duyệt xác nhận tâm nơ / mép ảnh / đáy header khớp khoảng 64px ở khung 496×510 và 86px ở khung 1143×510. Khi footer đã phủ qua mép ảnh (top footer khoảng -50px), nơ vẫn hiện đầy đủ. Ảnh kiểm tra: `bow-above-header-footer-mobile.jpg`, `bow-above-header-footer-desktop.jpg`. Kiểm tra cú pháp JS và bản xuất Pages cùng bài test catalog/search/cart đều qua.
