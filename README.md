@@ -16,9 +16,11 @@ Cũng có thể chạy `npm start`. Mở **http://127.0.0.1:4173**. Dừng bằn
 
 Đã áp dụng feedback Canva 6 trang: xem `feedback/CHECKLIST.md`. Thay ảnh dấu cộng tại **http://127.0.0.1:4173/__editor/**. Giao diện checkout thử ở `/checkout`, trang Coming soon ở `/pages/coming-soon`. Các sửa đổi dùng `custom.css` và `custom.js`.
 
-Đã chọn bản 2 cho trang chủ; `/page-2` giữ cùng giao diện để tương thích liên kết cũ. Khi nơ bắt đầu xuất hiện, thanh trắng tinh riêng thay thế header điều hướng. Menu, logo và icon không hiện lại khi cuộn lên/xuống trong vùng ảnh–footer. Khi cuộn lên trước vùng có nơ, header điều hướng hoạt động bình thường.
+Trang chủ, `/page-2` và 190 trang storefront dùng chung vùng nơ–ảnh biển–footer. Thanh trắng chỉ thay header điều hướng khi nơ chạm mép header; việc ảnh vừa xuất hiện ở cuối màn hình không làm header biến mất. Checkout và công cụ sửa ảnh giữ bố cục riêng.
 
-Ảnh biển nằm trong section riêng, giữ đúng tỷ lệ gốc và cuộn hết khỏi màn hình. Nơ dùng CSS sticky qua cả ảnh và footer, thu gọn còn 40px trên bản hẹp / 48px trên desktop. Hai trang không tải hiệu ứng nền cũ; bộ điều khiển header trùng của theme được tắt. Bộ nút so sánh hai bản đã bỏ.
+Ảnh cuối trang dùng ảnh lá mùa thu trong khung ngang 16:9, căn giữa để loại mốc ngày ở góc dưới; không có chữ hay nút đè lên ảnh. About us không chèn ảnh trước footer. Thanh trắng có nơ cao bằng 75% header điều hướng (64,5px trên desktop / 48px trên điện thoại); footer cách ảnh 1px và cao theo nội dung. Header điều hướng dùng lại logic gốc của theme; script nơ chỉ điều khiển vùng nơ–footer. Thanh nơ nằm dưới lớp giỏ hàng, tìm kiếm và menu. Nơ dùng CSS sticky qua ảnh và footer, dùng kích thước tăng 12% so với gốc: clamp(98.56px, 8.4vw, 156.8px), giữ đúng tỷ lệ ảnh và không thu nhỏ khi cuộn; mobile dùng nơ 88px. Với màn hình rộng từ 1440px, ảnh cuối trang cao tối đa 640px hoặc 75svh.
+
+Banner ren hồng gốc nằm giữa New Arrivals và Make it yours. New Arrivals đưa đủ 37 ảnh sản phẩm khác nhau vào carousel để thử hiệu ứng. `/data/preview-media.json` cung cấp ảnh minh họa cho thẻ thiếu ảnh hoặc trùng ảnh trong cùng danh sách; thẻ này có nhãn **Ảnh minh họa**. Ảnh hover dùng ảnh khác trong kho để thử chuyển cảnh. JSON catalog, tên, giá và tồn kho không thay đổi; ảnh minh họa không phải ảnh xác thực của sản phẩm thiếu ảnh.
 
 - `dist/index.html`: trang chủ.
 - `dist/custom.css`: CSS tùy chỉnh, được nạp sau CSS gốc trên mọi trang.
@@ -26,6 +28,7 @@ Cũng có thể chạy `npm start`. Mở **http://127.0.0.1:4173**. Dừng bằn
 - `scripts/apply_autumn_images.py`: dùng sáu ảnh mùa thu, các khung marketing và liên kết bộ sưu tập trong trang chủ.
 - `dist/page-2/index.html`, `dist/bow-comparison.css`, `dist/bow-comparison.js`: bản đã chọn, nơ ghim trên thanh trắng riêng.
 - `scripts/build_bow_comparison.py`: tạo lại bản đã chọn cho trang chủ và alias `/page-2`.
+- `scripts/apply_visual_fixes.py`: khôi phục banner ren và dựng carousel từ các ảnh sản phẩm có sẵn; chạy sau `build_bow_comparison.py`.
 - `dist/assets/cdn.hstatic.net/themes/200001179192/1001519910/14/`: mã frontend gốc; `main.scss.css`, `general.scss.css`, `main.js`, `general.js`, `pages.scss.css` và thư viện. Các file `.scss.css` là CSS đã biên dịch, chỉnh sửa như CSS thông thường.
 - `dist/products/<handle>/index.html`: giao diện từng sản phẩm.
 - `dist/collections/<handle>/index.html`: giao diện từng bộ sưu tập.
@@ -61,6 +64,7 @@ python scripts/mirror.py
 python scripts/apply_feedback.py
 python scripts/apply_autumn_images.py
 python scripts/build_bow_comparison.py
+python scripts/apply_visual_fixes.py
 ```
 
 `mirror.py` ưu tiên bộ nhớ đệm trong `source/`; để lấy HTML/CSS/JS mới, di chuyển bản cache tương ứng ra khỏi `source/` trước khi chạy. Danh sách sitemap ban đầu nằm tại `source/sitemap-urls.json`.

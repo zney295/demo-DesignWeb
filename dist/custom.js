@@ -4,6 +4,11 @@
   const defaultPlus = '/assets/custom/quick-add.svg';
   let plusImage = defaultPlus;
   const products = new Map();
+  let previewMedia = [];
+  fetch('/data/preview-media.json').then(r => r.json()).then(items => {
+    previewMedia = items;
+    decorate(document);
+  }).catch(() => {});
   const catalogReady = fetch('/data/products.json').then(r => r.json()).then(items => {
     items.forEach(p => products.set(p.handle, p));
     decorate(document);
@@ -18,6 +23,7 @@
     setTimeout(() => node.remove(), 4500);
   }
   function decorate(root) {
+    decorateMedia(root);
     root.querySelectorAll('.product-btn--plus:not([data-quick-add])').forEach(old => {
       const url = old.getAttribute('href') || old.closest('.product-loop--wrap')?.querySelector('a[href*="/products/"]')?.getAttribute('href');
       if (!url) return;
@@ -75,6 +81,56 @@
         palette.append(swatch);
       });
       card.querySelector('.product-loop--body')?.append(palette);
+    });
+  }
+  const imageKey = url => (url || '').replace(/_(compact|grande|master|1024x1024)(?=\.)/, '');
+  function decorateMedia(root) {
+    if (!previewMedia.length) return;
+    const cards = [...root.querySelectorAll('.product-loop--wrap')];
+    const lists = new Set(cards.map(card => card.closest('.products-slide, .products-grid, .products-list, .grid-products') || card.closest('.product-loop')?.parentElement || card.parentElement));
+    const known = new Map(previewMedia.map(item => [imageKey(item.image), item]));
+    lists.forEach(list => {
+      const entries = [...list.querySelectorAll('.product-loop--wrap')].map(card => {
+        const link = card.querySelector('.product-loop--link');
+        const handle = link?.getAttribute('href')?.split('/products/')[1]?.split(/[?#/]/)[0];
+        const product = products.get(handle);
+        return {card, product, original: known.get(imageKey(product?.featured_image))};
+      });
+      // Keep genuine photos for their own products before assigning demo photos.
+      const reserved = new Set(entries.map(entry => entry.original?.image).filter(Boolean));
+      const used = new Set();
+      entries.forEach(({card, product, original}, index) => {
+        const item = original && !used.has(original.image) ? original :
+          previewMedia.find(photo => !used.has(photo.image) && !reserved.has(photo.image)) ||
+          previewMedia.find(photo => !used.has(photo.image)) || previewMedia[index % previewMedia.length];
+        used.add(item.image);
+        const illustration = !original || item.image !== original.image;
+        const poolIndex = previewMedia.indexOf(item);
+        const second = previewMedia[(poolIndex + Math.floor(previewMedia.length / 2)) % previewMedia.length];
+        const title = product?.title || card.querySelector('.product-loop--link')?.getAttribute('aria-label') || '';
+        [['.img-first', item.image, title + (illustration ? ' — ảnh minh họa' : '')],
+         ['.img-second', second.image, 'Ảnh minh họa hiệu ứng']].forEach(([selector, src, alt]) => {
+          const picture = card.querySelector(selector);
+          const img = picture?.querySelector('img');
+          if (!img) return;
+          picture.querySelectorAll('source').forEach(source => source.remove());
+          img.removeAttribute('srcset');
+          img.removeAttribute('data-src');
+          img.removeAttribute('data-srcset');
+          img.classList.remove('lazyload', 'lazyloading');
+          img.classList.add('lazyloaded');
+          img.alt = alt;
+          img.decoding = 'async';
+          if (img.getAttribute('src') !== src) img.src = src;
+        });
+        const label = card.querySelector('.preview-image-label');
+        if (illustration && !label) {
+          const node = document.createElement('span');
+          node.className = 'preview-image-label';
+          node.textContent = 'Ảnh minh họa';
+          card.querySelector('.product-loop--head')?.append(node);
+        } else if (!illustration) label?.remove();
+      });
     });
   }
   document.addEventListener('click', async event => {
@@ -199,13 +255,6 @@
       });
     };
     watchImages(document);
-    const media = document.querySelector('.section-newarrival .s-media');
-    if (media) {
-      const size = () => media.parentElement.style.setProperty('--newarrival-height', matchMedia('(min-width: 992px)').matches ? media.getBoundingClientRect().height + 'px' : 'auto');
-      new ResizeObserver(size).observe(media);
-      addEventListener('resize', size);
-      size();
-    }
     new MutationObserver(records => {
       records.forEach(record => record.addedNodes.forEach(node => {
         if (node.nodeType !== 1) return;

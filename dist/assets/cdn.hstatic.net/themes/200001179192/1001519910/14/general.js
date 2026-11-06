@@ -844,7 +844,6 @@ WEBDS.Global = {
 			})
 		},
 		scrollFixedHeader: function(){
-			if (document.body.dataset.bowVariant === 'header') return;
 			var $parentHeader = $('.main-header');
 			var parentHeight = $parentHeader.find('.main-header--inner').outerHeight();
 			var $header = $('.main-header--inner');

@@ -1,15 +1,15 @@
-/* Selected variant: an uncropped photo and a bow on its own white strip. */
+/* Shared storefront scene: the bow becomes the header at the photo's edge. */
 body[data-bow-variant="header"] {
-  --reveal-bow-width: clamp(88px, 8vw, 112px);
-  --bow-docked-width: 40px;
+  --reveal-bow-width: clamp(98.56px, 8.4vw, 156.8px);
   --reveal-header-height: 64px;
+  --bow-bar-height: calc(var(--reveal-header-height) * .75);
 }
 .bow-comparison__region { position: relative; }
 .bow-comparison__bar {
   position: fixed;
   inset: 0 0 auto;
-  z-index: 40;
-  height: var(--reveal-header-height, 64px);
+  z-index: 14;
+  height: var(--bow-bar-height);
   background: #fff;
   border: 0;
   box-shadow: none;
@@ -24,14 +24,14 @@ body[data-bow-variant="header"] {
   padding: 0;
   border: 0;
   background: #fff;
-  scroll-margin-top: var(--reveal-header-height, 86px);
+  scroll-margin-top: var(--bow-bar-height);
 }
 .bow-comparison__bow {
   position: sticky;
-  top: var(--bow-sticky-top, calc(var(--reveal-header-height, 64px) + 2px - var(--reveal-bow-width) * .3));
-  z-index: 50;
-  height: calc(var(--reveal-bow-width) * .6);
-  margin: 0 0 calc(var(--reveal-bow-width) * -.3);
+  top: var(--bow-sticky-top, max(0px, calc(var(--bow-bar-height) + 2px - var(--reveal-bow-width) * .5)));
+  z-index: 15;
+  height: var(--reveal-bow-width);
+  margin: 0 0 calc(var(--reveal-bow-width) * -.5);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -41,39 +41,21 @@ body[data-bow-variant="header"] {
   display: block;
   width: var(--reveal-bow-width);
   height: 100%;
-  object-fit: cover;
-  transform: scale(var(--bow-scale, 1));
-  transform-origin: center;
-  will-change: transform;
+  object-fit: contain;
+  transform: none;
 }
 .bow-comparison__photo {
   position: static;
   display: block;
   width: 100%;
+  margin: 0 auto;
   height: auto;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  object-position: center;
   max-width: none;
   max-height: none;
   transform: none;
-}
-body[data-bow-variant="header"].has-smart-header .main-header {
-  min-height: var(--reveal-header-height, 86px) !important;
-}
-body[data-bow-variant="header"].has-smart-header .main-header--inner {
-  position: fixed !important;
-  inset: 0 0 auto !important;
-  z-index: 40 !important;
-  background: #fff;
-  opacity: 1 !important;
-  visibility: visible !important;
-  transform: none !important;
-  transition: transform 120ms ease-out, visibility 0s !important;
-  will-change: transform;
-}
-body[data-bow-variant="header"].is-header-hidden .main-header--inner {
-  transform: translateY(-105%) !important;
-  visibility: hidden !important;
-  pointer-events: none;
-  transition: transform 120ms ease-out, visibility 0s linear 120ms !important;
 }
 /* Reverse scrolling must not bring navigation back into the bow scene. */
 body[data-bow-variant="header"].is-bow-scene-active .main-header--inner {
@@ -84,19 +66,21 @@ body[data-bow-variant="header"].is-bow-scene-active .main-header--inner {
 body[data-bow-variant="header"] .main-footer {
   position: relative;
   z-index: 1;
-  margin: 0;
+  margin: 1px 0 0;
 }
-/* Let the entire image leave the viewport even when the footer content is short. */
 body[data-bow-variant="header"] .main-footer--grid {
-  min-height: calc(100vh - var(--reveal-header-height, 86px));
-  min-height: calc(100svh - var(--reveal-header-height, 86px));
+  min-height: 0;
 }
 body[data-bow-variant="header"] #comparison-footer {
-  scroll-margin-top: var(--reveal-header-height, 86px);
+  scroll-margin-top: var(--bow-bar-height);
 }
 @media (min-width: 992px) {
-  body[data-bow-variant="header"] { --reveal-header-height: 86px; --bow-docked-width: 48px; }
+  body[data-bow-variant="header"] { --reveal-header-height: 86px; }
 }
-@media (prefers-reduced-motion: reduce) {
-  body[data-bow-variant="header"].has-smart-header .main-header--inner { transition: none !important; }
+@media (min-width: 1440px) {
+  .bow-comparison__photo { max-height: min(640px, 75svh); }
+}
+@media (max-width: 600px) {
+  body[data-bow-variant="header"] { --reveal-bow-width: 88px; }
+  .bow-comparison__photo { width: 100%; }
 }

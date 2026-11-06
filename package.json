@@ -6,6 +6,6 @@
   "scripts": {
     "start": "python server.py",
     "dev": "python server.py",
-    "refresh": "python scripts/capture_data.py && python scripts/mirror.py && python scripts/apply_feedback.py && python scripts/apply_autumn_images.py && python scripts/build_bow_comparison.py"
+    "refresh": "python scripts/capture_data.py && python scripts/mirror.py && python scripts/apply_feedback.py && python scripts/apply_autumn_images.py && python scripts/build_bow_comparison.py && python scripts/apply_visual_fixes.py"
   }
 }
