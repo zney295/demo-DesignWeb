@@ -16,18 +16,16 @@ Cũng có thể chạy `npm start`. Mở **http://127.0.0.1:4173**. Dừng bằn
 
 Đã áp dụng feedback Canva 6 trang: xem `feedback/CHECKLIST.md`. Thay ảnh dấu cộng tại **http://127.0.0.1:4173/__editor/**. Giao diện checkout thử ở `/checkout`, trang Coming soon ở `/pages/coming-soon`. Các sửa đổi dùng `custom.css` và `custom.js`.
 
-So sánh nơ: **http://127.0.0.1:4173/** giữ bản hiện tại; **http://127.0.0.1:4173/page-2** là bản thử nơ đính vào top bar. Trang 2 dùng ảnh biển riêng có đủ tỷ lệ gốc. Nơ ghim bằng CSS sticky tại mép dưới header, thu gọn còn 40px trên bản hẹp / 48px trên desktop và giữ tới footer. Dùng các nút so sánh ở góc dưới để đổi bản hoặc tới footer. Thay đổi này đang giới hạn ở trang thử, chưa áp đại trà cách ghim mới.
+Đã chọn bản 2 cho trang chủ; `/page-2` giữ cùng giao diện để tương thích liên kết cũ. Khi nơ bắt đầu xuất hiện, thanh trắng tinh riêng thay thế header điều hướng. Menu, logo và icon không hiện lại khi cuộn lên/xuống trong vùng ảnh–footer. Khi cuộn lên trước vùng có nơ, header điều hướng hoạt động bình thường.
 
-Nhấn lại nút của bản đang xem để quay về ảnh. Khi đổi sang bản còn lại lúc đang xem footer, vị trí so sánh vẫn ở footer.
-
-Ảnh trang 2 nằm trong section riêng, độc lập với footer, giữ đúng tỷ lệ gốc và cuộn theo trang. Footer có đủ chiều cao để cuộn hết ảnh khỏi vùng nhìn. Một wrapper chung giữ phạm vi sticky cho nơ qua cả ảnh lẫn footer, không di chuyển node khi cuộn. CSS/JS nền cũ không được tải ở trang 2. Builder thêm guard vào `general.js` để tắt bộ điều khiển header trùng của theme chỉ trên trang 2.
+Ảnh biển nằm trong section riêng, giữ đúng tỷ lệ gốc và cuộn hết khỏi màn hình. Nơ dùng CSS sticky qua cả ảnh và footer, thu gọn còn 40px trên bản hẹp / 48px trên desktop. Hai trang không tải hiệu ứng nền cũ; bộ điều khiển header trùng của theme được tắt. Bộ nút so sánh hai bản đã bỏ.
 
 - `dist/index.html`: trang chủ.
 - `dist/custom.css`: CSS tùy chỉnh, được nạp sau CSS gốc trên mọi trang.
 - `dist/footer-reveal.css`, `dist/footer-reveal.js`: khung ảnh biển responsive, nơ ghim header và footer trượt lên trên ảnh. Ảnh gốc ở `dist/assets/custom/girlhood-seaside.jpg`.
 - `scripts/apply_autumn_images.py`: dùng sáu ảnh mùa thu, các khung marketing và liên kết bộ sưu tập trong trang chủ.
-- `dist/page-2/index.html`, `dist/bow-comparison.css`, `dist/bow-comparison.js`: bản thử nơ gắn header và nút chuyển hai bản.
-- `scripts/build_bow_comparison.py`: tạo lại trang 2 từ trang chủ và giữ nguyên bản 1 để đối chiếu.
+- `dist/page-2/index.html`, `dist/bow-comparison.css`, `dist/bow-comparison.js`: bản đã chọn, nơ ghim trên thanh trắng riêng.
+- `scripts/build_bow_comparison.py`: tạo lại bản đã chọn cho trang chủ và alias `/page-2`.
 - `dist/assets/cdn.hstatic.net/themes/200001179192/1001519910/14/`: mã frontend gốc; `main.scss.css`, `general.scss.css`, `main.js`, `general.js`, `pages.scss.css` và thư viện. Các file `.scss.css` là CSS đã biên dịch, chỉnh sửa như CSS thông thường.
 - `dist/products/<handle>/index.html`: giao diện từng sản phẩm.
 - `dist/collections/<handle>/index.html`: giao diện từng bộ sưu tập.

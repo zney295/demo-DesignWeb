@@ -1,4 +1,4 @@
-"""Build a local comparison: current bow on / and a header-mounted bow on /page-2."""
+"""Keep the selected bow treatment on the home page and its /page-2 alias."""
 from pathlib import Path
 import re
 
@@ -8,50 +8,41 @@ home_path = DIST / 'index.html'
 home = home_path.read_text(encoding='utf-8')
 home = re.sub(r'<nav\b[^>]*id="bow-comparison"[^>]*>.*?</nav>\s*', '', home, flags=re.S)
 home = re.sub(r'\s*data-bow-variant="[^"]*"', '', home)
-home = re.sub(r'<link rel="stylesheet" href="/bow-comparison\.css(?:\?[^\"]*)?">\s*', '', home)
-home = re.sub(r'<script src="/bow-comparison\.js(?:\?[^\"]*)?" defer></script>\s*', '', home)
+home = re.sub(r'<link rel="stylesheet" href="/(?:bow-comparison|footer-reveal)\.css(?:\?[^\"]*)?">\s*', '', home)
+home = re.sub(r'<script src="/(?:bow-comparison|footer-reveal)\.js(?:\?[^\"]*)?" defer></script>\s*', '', home)
 if 'id="comparison-footer"' not in home:
     home = home.replace('<footer ', '<footer id="comparison-footer" ', 1)
 
-
-def controls(variant):
-    def link(label, target, name):
-        selected = ' aria-current="page"' if name == variant else ''
-        return f'<a href="{target}#footer-reveal" data-compare-variant="{name}"{selected}>{label}</a>'
-    return ('<nav id="bow-comparison" aria-label="So sánh cách ghim nơ">'
-            + link('1 · Nơ hiện tại', '/', 'current')
-            + link('2 · Ghim top bar', '/page-2', 'header')
-            + '<a href="#comparison-footer" class="bow-comparison__footer">Xem footer ↓</a></nav>\n')
-
-
-def finish(text, variant):
-    text = text.replace('<body ', f'<body data-bow-variant="{variant}" ', 1)
-    text = text.replace('</head>', '<link rel="stylesheet" href="/bow-comparison.css?v=4">\n</head>', 1)
-    return text.replace('</body>', controls(variant) + '<script src="/bow-comparison.js?v=4" defer></script>\n</body>', 1)
-
-
-# Keep the current photograph, header behavior and bow as the reference version.
-home_path.write_text(finish(home, 'current'), encoding='utf-8')
-second = home.replace('<script src="/footer-reveal.js" defer></script>', '')
-second = second.replace('<link rel="stylesheet" href="/footer-reveal.css">', '')
-second = re.sub(r'<title>.*?</title>', '<title>Trang 2 — Nơ ghim top bar | Mandy Crimson</title>', second, count=1, flags=re.S)
-second = re.sub(r'(<link rel="canonical" href=")[^"]*', r'\g<1>/page-2', second, count=1)
 photo_section = '''<div class="bow-comparison__region">
+  <div class="bow-comparison__bar" aria-hidden="true"></div>
   <div class="bow-comparison__bow" aria-hidden="true"><img src="/assets/cdn.hstatic.net/files/200001179192/file/logo-no.webp" alt="" width="168" height="125" decoding="async"></div>
 <section class="bow-photo-section" id="footer-reveal" aria-label="Girlhood">
   <img class="bow-comparison__photo" src="/assets/custom/girlhood-seaside.jpg" alt="Girlhood — bên bờ biển cùng những nốt nhạc" width="1280" height="720" loading="eager" decoding="async">
 </section>'''
-second, count = re.subn(
+
+home, count = re.subn(
     r'<section class="footer-reveal" id="footer-reveal"[^>]*>.*?(<footer\b.*?</footer>)\s*</section>',
-    lambda match: photo_section + '\n' + match[1] + '\n</div>', second, count=1, flags=re.S)
+    lambda match: photo_section + '\n' + match[1] + '\n</div>', home, count=1, flags=re.S)
+if not count:
+    # Rebuilding is idempotent; refresh may also restore the original scene.
+    home, count = re.subn(
+        r'<div class="bow-comparison__region">.*?(<footer\b.*?</footer>)\s*</div>',
+        lambda match: photo_section + '\n' + match[1] + '\n</div>', home, count=1, flags=re.S)
 if count != 1:
-    raise ValueError('Expected one shared photo scene to replace with a standalone image section.')
+    raise ValueError('Expected one photo/footer scene.')
+
+home = home.replace('<body ', '<body data-bow-variant="header" ', 1)
+home = re.sub(r'<title>.*?</title>', '<title>Mandy Crimson</title>', home, count=1, flags=re.S)
+home = re.sub(r'(<link rel="canonical" href=")[^"]*', r'\g<1>/', home, count=1)
+home = home.replace('</head>', '<link rel="stylesheet" href="/bow-comparison.css?v=5">\n</head>', 1)
+home = home.replace('</body>', '<script src="/bow-comparison.js?v=5" defer></script>\n</body>', 1)
+home_path.write_text(home, encoding='utf-8')
+second = re.sub(r'(<link rel="canonical" href=")[^"]*', r'\g<1>/page-2', home, count=1)
 target = DIST / 'page-2/index.html'
 target.parent.mkdir(parents=True, exist_ok=True)
-target.write_text(finish(second, 'header'), encoding='utf-8')
+target.write_text(second, encoding='utf-8')
 
-# The test page has its own header controller. Do not install the theme's second
-# jQuery scroll/resize controller there, including after a fresh mirror.
+# The selected treatment owns header state, including after a fresh mirror.
 theme_path = DIST / 'assets/cdn.hstatic.net/themes/200001179192/1001519910/14/general.js'
 theme = theme_path.read_text(encoding='utf-8')
 guard = "if (document.body.dataset.bowVariant === 'header') return;"
@@ -61,4 +52,4 @@ if guard not in theme:
         raise ValueError('Theme header controller entry point was not found.')
     theme = theme.replace(hook, hook + '\n\t\t\t' + guard, 1)
     theme_path.write_text(theme, encoding='utf-8')
-print('Bow comparison ready: / (current) and /page-2 (header-mounted bow, standalone photograph).')
+print('Selected bow ready on / and /page-2: plain white strip, no comparison controls.')

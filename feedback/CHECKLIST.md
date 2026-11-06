@@ -110,3 +110,9 @@ Kiểm tra controller bằng Node VM với code thực: 100 sự kiện scroll g
 Ở bản 1 và các trang dùng `footer-reveal`, nơ có lớp 60, cao hơn header 40 và footer 30. Tâm nơ và mép trên ảnh dùng chung một đường ghim theo chiều cao header. Header giữ hiện khi đi vào vùng ảnh/footer để tránh che nơ lúc xuất hiện lại; observer chỉ phản ứng khi menu/search/cart đổi trạng thái.
 
 Trình duyệt xác nhận tâm nơ / mép ảnh / đáy header khớp khoảng 64px ở khung 496×510 và 86px ở khung 1143×510. Khi footer đã phủ qua mép ảnh (top footer khoảng -50px), nơ vẫn hiện đầy đủ. Ảnh kiểm tra: `bow-above-header-footer-mobile.jpg`, `bow-above-header-footer-desktop.jpg`. Kiểm tra cú pháp JS và bản xuất Pages cùng bài test catalog/search/cart đều qua.
+
+## Chọn bản 2 — nơ ghim trên thanh trắng riêng
+
+Trang chủ và `/page-2` cùng dùng bản 2; bỏ nút đổi bản. `.bow-comparison__bar` là lớp cố định riêng, nền `#fff`, không border/shadow, có chiều cao khớp vùng header. Khi nơ đi vào viewport, header điều hướng bị ẩn và inert; chiều cuộn không làm hiện lại menu/logo/icon trong toàn bộ vùng ảnh–footer. Trước vùng có nơ, header hoạt động bình thường.
+
+Đã thử trên desktop và mobile: nền trắng tính toán `rgb(255, 255, 255)`; thanh cao khoảng 86px/64px; cuộn lên từ trạng thái ghim rồi cuộn xuống vẫn giữ header ẩn và thanh trắng hiện; không tràn ngang. Builder chạy lại không đổi kết quả; xuất Pages và kiểm tra catalog/search/cart đều qua.

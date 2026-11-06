@@ -1,14 +1,6 @@
 (() => {
   'use strict';
   const start = () => {
-    const footer = document.querySelector('#comparison-footer');
-    document.querySelectorAll('[data-compare-variant]').forEach(link => {
-      link.addEventListener('click', () => {
-        // Compare the footer state directly when switching after the photo.
-        const switching = link.dataset.compareVariant !== document.body.dataset.bowVariant;
-        link.hash = switching && footer?.getBoundingClientRect().top < innerHeight * .6 ? 'comparison-footer' : 'footer-reveal';
-      });
-    });
     if (document.body.dataset.bowVariant !== 'header') return;
     const region = document.querySelector('.bow-comparison__region');
     const bow = region?.querySelector('.bow-comparison__bow');
@@ -24,7 +16,7 @@
     let direction = 0;
     let travel = 0;
     let lastScale = -1;
-    let geometry = {height: 64, pinStart: Infinity, dockScale: .5, maxY: Infinity};
+    let geometry = {height: 64, sceneStart: Infinity, pinStart: Infinity, dockScale: .5, maxY: Infinity};
     const overlayIsOpen = () => body.matches('.open-menumobile, .open-search, .open-sidebar-cart');
     let overlayOpen = overlayIsOpen();
     let keyboardFocus = false;
@@ -41,9 +33,11 @@
       const bowWidth = bowImage.offsetWidth;
       const dockWidth = parseFloat(getComputedStyle(body).getPropertyValue('--bow-docked-width')) || 40;
       const top = height + 2 - bowHeight / 2;
+      const regionTop = region.getBoundingClientRect().top + scrollY;
       geometry = {
         height,
-        pinStart: region.getBoundingClientRect().top + scrollY - top,
+        sceneStart: regionTop - innerHeight,
+        pinStart: regionTop - top,
         dockScale: dockWidth / bowWidth,
         maxY: Math.max(0, document.documentElement.scrollHeight - innerHeight)
       };
@@ -55,6 +49,10 @@
       scheduled = false;
       if (geometryDirty) measure();
       const y = Math.max(0, Math.min(scrollY, geometry.maxY));
+      // The bow has its own strip throughout the photo/footer scene, in either
+      // scroll direction. Navigation only returns before this scene is visible.
+      const sceneActive = y >= geometry.sceneStart;
+      body.classList.toggle('is-bow-scene-active', sceneActive);
       const nextPinned = y >= geometry.pinStart;
       if (nextPinned !== pinned) {
         pinned = nextPinned;
@@ -76,7 +74,8 @@
         direction = nextDirection;
       }
       lastY = y;
-      if (y >= geometry.pinStart - 160 || overlayOpen || keyboardFocus || y < geometry.height) hideHeader(false);
+      if (sceneActive) hideHeader(true);
+      else if (overlayOpen || keyboardFocus || y < geometry.height) hideHeader(false);
       else if (direction < 0 && travel >= 80) hideHeader(false);
       else if (direction > 0 && travel >= 32 && y > geometry.height * 2) hideHeader(true);
     };

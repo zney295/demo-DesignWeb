@@ -1,44 +1,22 @@
-/* Local comparison controls are only included on the two test home pages. */
-#bow-comparison {
-  position: fixed;
-  inset: auto auto max(16px, env(safe-area-inset-bottom)) 16px;
-  z-index: 110;
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 4px;
-  max-width: calc(100vw - 32px);
-  padding: 5px;
-  border: 1px solid #e4d9dd;
-  border-radius: 28px;
-  background: #fff;
-  box-shadow: 0 4px 20px #35252e12;
-  font: 14px/1.25 Arial, sans-serif;
-}
-#bow-comparison a {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 36px;
-  padding: 8px 13px;
-  border-radius: 22px;
-  color: #42343a;
-  text-decoration: none;
-  white-space: nowrap;
-}
-#bow-comparison a[aria-current="page"] { background: #35252e; color: #fff; }
-#bow-comparison a:hover { background: #f7e9ef; color: #35252e; }
-#bow-comparison a:focus-visible { outline: 2px solid #a53b74; outline-offset: 2px; }
-#bow-comparison .bow-comparison__footer { font-size: 12px; color: #7c626d; }
-#comparison-footer { scroll-margin-top: calc(var(--reveal-header-height, 86px) + 76px); }
-
-/* Variant 2: the photo is a real, uncropped image in the document flow. */
+/* Selected variant: an uncropped photo and a bow on its own white strip. */
 body[data-bow-variant="header"] {
   --reveal-bow-width: clamp(88px, 8vw, 112px);
   --bow-docked-width: 40px;
   --reveal-header-height: 64px;
 }
 .bow-comparison__region { position: relative; }
+.bow-comparison__bar {
+  position: fixed;
+  inset: 0 0 auto;
+  z-index: 40;
+  height: var(--reveal-header-height, 64px);
+  background: #fff;
+  border: 0;
+  box-shadow: none;
+  visibility: hidden;
+  pointer-events: none;
+}
+.is-bow-scene-active .bow-comparison__bar { visibility: visible; }
 .bow-photo-section {
   position: relative;
   display: block;
@@ -97,8 +75,12 @@ body[data-bow-variant="header"].is-header-hidden .main-header--inner {
   pointer-events: none;
   transition: transform 120ms ease-out, visibility 0s linear 120ms !important;
 }
-/* A fast jump across the docking point must not wait for a header animation. */
-body[data-bow-variant="header"].is-bow-header-pinned .main-header--inner { transition: none !important; }
+/* Reverse scrolling must not bring navigation back into the bow scene. */
+body[data-bow-variant="header"].is-bow-scene-active .main-header--inner {
+  visibility: hidden !important;
+  pointer-events: none !important;
+  transition: none !important;
+}
 body[data-bow-variant="header"] .main-footer {
   position: relative;
   z-index: 1;
@@ -111,11 +93,6 @@ body[data-bow-variant="header"] .main-footer--grid {
 }
 body[data-bow-variant="header"] #comparison-footer {
   scroll-margin-top: var(--reveal-header-height, 86px);
-}
-@media (max-width: 480px) {
-  #bow-comparison { inset-inline: 10px; max-width: calc(100vw - 20px); gap: 1px; }
-  #bow-comparison a { padding-inline: 10px; font-size: 12px; }
-  #bow-comparison .bow-comparison__footer { padding-inline: 6px; font-size: 11px; }
 }
 @media (min-width: 992px) {
   body[data-bow-variant="header"] { --reveal-header-height: 86px; --bow-docked-width: 48px; }
