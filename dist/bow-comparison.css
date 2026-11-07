@@ -89,6 +89,11 @@ body[data-bow-variant="header"] #comparison-footer {
 @media (max-width: 600px) {
   body[data-bow-variant="header"] { --reveal-bow-width: 88px; }
   .bow-comparison__photo { width: 100%; }
+  /* Keep enough scroll for the photo to clear the bar as mobile chrome hides. */
+  .bow-photo-section + .main-footer .main-footer--grid {
+    min-height: calc(100vh - var(--bow-bar-height));
+    min-height: calc(100lvh - var(--bow-bar-height));
+  }
 }
 @media (prefers-reduced-motion: reduce) {
   .bow-comparison__bar { transition: none; }
