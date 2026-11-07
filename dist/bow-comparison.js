@@ -11,7 +11,9 @@
     let scheduled = false;
     let geometryDirty = true;
     let pinned = false;
-    let geometry = {height: 64, sceneStart: Infinity, pinStart: Infinity, maxY: Infinity};
+    let lastOffset = 0;
+    const approachDistance = 72;
+    let geometry = {pinStart: Infinity, maxY: Infinity};
     const measure = () => {
       // Geometry is read only after a layout change, never on ordinary scroll frames.
       const height = header.offsetHeight;
@@ -19,9 +21,6 @@
       const top = Math.max(0, height * .75 + 2 - bowHeight / 2);
       const regionTop = region.getBoundingClientRect().top + scrollY;
       geometry = {
-        height,
-        // Replace navigation only when the bow reaches the header edge.
-        sceneStart: regionTop - top,
         pinStart: regionTop - top,
         maxY: Math.max(0, document.documentElement.scrollHeight - innerHeight)
       };
@@ -35,13 +34,24 @@
       const y = Math.max(0, Math.min(scrollY, geometry.maxY));
       // The bow has its own strip throughout the photo/footer scene, in either
       // scroll direction. Navigation only returns before this scene is visible.
-      const sceneActive = y >= geometry.sceneStart;
-      body.classList.toggle('is-bow-scene-active', sceneActive);
-      header.inert = sceneActive;
       const nextPinned = y >= geometry.pinStart;
       if (nextPinned !== pinned) {
         pinned = nextPinned;
+        body.classList.toggle('is-bow-scene-active', pinned);
         body.classList.toggle('is-bow-header-pinned', pinned);
+        header.inert = pinned;
+      }
+
+      // Ease out of normal scroll speed before sticky takes over at the seam.
+      const distance = geometry.pinStart - y;
+      let offset = 0;
+      if (geometry.pinStart <= geometry.maxY && distance > 0 && distance < approachDistance) {
+        const progress = 1 - distance / approachDistance;
+        offset = -distance * progress ** 2;
+      }
+      if (offset !== lastOffset) {
+        bowImage.style.setProperty('--bow-approach-offset', offset + 'px');
+        lastOffset = offset;
       }
     };
     const schedule = () => {
