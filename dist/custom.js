@@ -224,7 +224,82 @@
     addEventListener('popstate', sync);
     sync();
   }
+  function autumnLeaves() {
+    if (document.getElementById('leaves')) return;
+    const leaves = document.createElement('div');
+    leaves.id = 'leaves';
+    leaves.setAttribute('aria-hidden', 'true');
+    const leafCount = 24;
+    const cycleSeconds = 20;
+    leaves.style.setProperty('--leaf-cycle', cycleSeconds + 's');
+    for (let index = 0; index < leafCount; index++) {
+      const leaf = document.createElement('span');
+      leaf.className = 'autumn-leaf';
+      leaf.style.left = ((index * 37 + 11) % 100) + '%';
+      // Equal phases keep arrivals continuous. Mobile hides alternating leaves.
+      leaf.style.setProperty('--leaf-phase', -(index * cycleSeconds / leafCount) + 's');
+      leaf.style.setProperty('--leaf-size', (26 + index * 7 % 17) + 'px');
+      leaf.style.setProperty('--leaf-drift', (index * 31 % 150 - 75) + 'px');
+      leaf.style.setProperty('--leaf-tilt', ((index * 67 + 23) % 360 - 180) + 'deg');
+      leaf.style.setProperty('--leaf-opacity', .6 + index % 4 * .07);
+      leaf.style.setProperty('--sway-duration', (2.2 + index % 5 * .35) + 's');
+      leaf.style.setProperty('--sway-phase', -(index * .73 % 3) + 's');
+      const wind = document.createElement('span');
+      wind.className = 'autumn-leaf__wind';
+      const sprite = document.createElement('img');
+      sprite.className = 'autumn-leaf__sprite';
+      sprite.src = '/assets/custom/autumn/maple-leaf-red-brown.webp';
+      sprite.alt = '';
+      sprite.width = 192;
+      sprite.height = 192;
+      sprite.decoding = 'async';
+      sprite.draggable = false;
+      wind.append(sprite);
+      leaf.append(wind);
+      leaves.append(leaf);
+    }
+    document.body.append(leaves);
+    const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
+    let gustTimer;
+    function scheduleGust() {
+      clearTimeout(gustTimer);
+      leaves.querySelectorAll('.is-caught').forEach(leaf => leaf.classList.remove('is-caught'));
+      if (document.hidden || reducedMotion.matches) return;
+      gustTimer = setTimeout(() => {
+        if (document.hidden || reducedMotion.matches) return scheduleGust();
+        const candidates = [...leaves.children].filter(leaf => {
+          if (getComputedStyle(leaf).display === 'none') return false;
+          const box = leaf.getBoundingClientRect();
+          return box.top > 80 && box.bottom < innerHeight * .65 && box.right > 0 && box.left < innerWidth;
+        });
+        const mobile = innerWidth < 768;
+        const count = Math.min(candidates.length, (mobile ? 1 : 2) + Math.floor(Math.random() * 2));
+        for (let index = 0; index < count; index++) {
+          const leaf = candidates.splice(Math.floor(Math.random() * candidates.length), 1)[0];
+          const direction = leaf.getBoundingClientRect().left < innerWidth / 2 ? 1 : -1;
+          const width = direction * (mobile ? 35 + Math.random() * 35 : 60 + Math.random() * 55);
+          const lift = 40 + Math.random() * 35;
+          // A closed curved path returns to the ongoing fall without a jump.
+          const path = `path('M 0 0 C ${width * .2} ${-lift} ${width} ${-lift} ${width} 0 C ${width} ${lift * .35} ${width * .25} ${lift * .6} 0 0')`;
+          leaf.style.setProperty('--gust-path', path);
+          leaf.style.setProperty('--gust-spin', direction * 360 + 'deg');
+          leaf.style.setProperty('--gust-duration', (2.8 + Math.random()) + 's');
+          leaf.style.setProperty('--gust-delay', Math.random() * .45 + 's');
+          leaf.classList.add('is-caught');
+        }
+        gustTimer = setTimeout(scheduleGust, 4500);
+      }, 8000 + Math.random() * 10000);
+    }
+    const syncMotion = () => {
+      leaves.classList.toggle('is-paused', document.hidden);
+      scheduleGust();
+    };
+    document.addEventListener('visibilitychange', syncMotion);
+    reducedMotion.addEventListener('change', syncMotion);
+    syncMotion();
+  }
   function ready() {
+    autumnLeaves();
     decorate(document);
     // Start loading a full screen before an image scrolls into view, including
     // cards returned by AJAX. This also works if the old lazy loader is delayed.

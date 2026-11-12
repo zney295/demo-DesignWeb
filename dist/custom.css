@@ -60,3 +60,70 @@ body:not(.temp-collection) .colorbar.is-fixed { display: none !important; }
   #homepage-slider img[data-campaign-image="park"] { object-position: 48% 65%; }
   #homepage-slider img[data-campaign-image="bookshop"] { object-position: 65% 50%; }
 }
+
+/* Maple sprites: evenly staggered falls, individual sway and occasional gusts. */
+#leaves {
+  position: fixed;
+  inset: 0;
+  z-index: 10;
+  overflow: hidden;
+  pointer-events: none;
+  user-select: none;
+}
+#leaves .autumn-leaf {
+  position: absolute;
+  top: -52px;
+  display: block;
+  width: var(--leaf-size);
+  height: var(--leaf-size);
+  opacity: 0;
+  animation: autumn-maple-fall var(--leaf-cycle) var(--leaf-phase) linear infinite;
+}
+#leaves .autumn-leaf__wind,
+#leaves .autumn-leaf__sprite {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+#leaves .autumn-leaf__sprite {
+  object-fit: contain;
+  transform-origin: 50% 65%;
+  filter: saturate(1.55) hue-rotate(-14deg) brightness(1.12);
+  animation: autumn-maple-sway var(--sway-duration) var(--sway-phase) ease-in-out infinite alternate;
+}
+#leaves .autumn-leaf:nth-child(3n) .autumn-leaf__sprite { filter: brightness(.83) saturate(.8); }
+#leaves .autumn-leaf:nth-child(3n + 1) .autumn-leaf__sprite { filter: saturate(1.35) hue-rotate(-6deg) brightness(1.03); }
+#leaves .autumn-leaf.is-caught .autumn-leaf__wind {
+  offset-path: var(--gust-path);
+  offset-anchor: 0 0;
+  offset-position: 0 0;
+  offset-rotate: 0deg;
+  animation: autumn-maple-gust var(--gust-duration) var(--gust-delay) cubic-bezier(.33, 0, .32, 1) both;
+}
+#leaves.is-paused * { animation-play-state: paused; }
+@keyframes autumn-maple-fall {
+  0% { transform: translate3d(0, 0, 0); opacity: 0; }
+  3% { transform: translate3d(0, 54px, 0); opacity: var(--leaf-opacity); }
+  10% { transform: translate3d(4px, 58px, 0); }
+  15% { transform: translate3d(0, 86px, 0); }
+  92% { opacity: var(--leaf-opacity); }
+  100% { transform: translate3d(var(--leaf-drift), calc(100vh + 104px), 0); opacity: 0; }
+}
+@keyframes autumn-maple-sway {
+  from { transform: perspective(300px) translate3d(-10px, 0, 0) rotate(calc(var(--leaf-tilt) - 18deg)) rotateY(-28deg); }
+  to { transform: perspective(300px) translate3d(12px, -5px, 0) rotate(calc(var(--leaf-tilt) + 20deg)) rotateY(38deg); }
+}
+@keyframes autumn-maple-gust {
+  from { offset-distance: 0%; transform: rotate(0deg); }
+  to { offset-distance: 100%; transform: rotate(var(--gust-spin)); }
+}
+@media (max-width: 767px) {
+  #leaves .autumn-leaf { width: calc(var(--leaf-size) * .8); height: calc(var(--leaf-size) * .8); }
+  #leaves .autumn-leaf:nth-child(even) { display: none; }
+  #leaves .autumn-leaf:nth-child(even),
+  #leaves .autumn-leaf:nth-child(even) * { animation: none; }
+}
+@media (prefers-reduced-motion: reduce), print {
+  #leaves { display: none; }
+  #leaves * { animation: none !important; }
+}
