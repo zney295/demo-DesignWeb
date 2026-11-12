@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
 from pathlib import Path
 import re
@@ -28,7 +29,15 @@ def build(base: str) -> Path:
     route = '|'.join(re.escape(name) for name in sorted(roots, key=len, reverse=True))
     pattern = re.compile(r'(?P<lead>[\'"`(=\s])/(?=(?:' + route + r')(?:[/?.#\'"`\s<)]|$))')
 
+    versions = {
+        '/' + path.name: hashlib.sha256(path.read_bytes()).hexdigest()[:12]
+        for path in target.iterdir() if path.suffix in {'.css', '.js'}
+    }
+
     def rewrite(text: str) -> str:
+        for url, version in versions.items():
+            text = re.sub(r'([\'"])' + re.escape(url) + r'(?:\?[^\'"\s]*)?\1',
+                          lambda m: m[1] + url + '?v=' + version + m[1], text)
         if not base:
             return text
         text = pattern.sub(lambda m: m['lead'] + base + '/', text)

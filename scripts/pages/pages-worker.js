@@ -2,13 +2,15 @@
 'use strict';
 const BASE = new URL(self.registration.scope).pathname.replace(/\/$/, '');
 const STORE = 'designweb-cart-' + BASE;
+// Revalidate browser HTTP cache on each request; unchanged files still use 304.
+const freshFetch = input => fetch(input, {cache: 'no-cache'});
 const json = (data, status = 200) => new Response(JSON.stringify(data), {
   status, headers: {'Content-Type': 'application/json; charset=utf-8', 'Cache-Control': 'no-store'},
 });
 let catalogPromise;
 let configPromise;
-const catalog = () => catalogPromise ||= fetch(BASE + '/data/products.json').then(r => r.json());
-const config = () => configPromise ||= fetch(BASE + '/pages-config.json').then(r => r.json());
+const catalog = () => catalogPromise ||= freshFetch(BASE + '/data/products.json').then(r => r.json());
+const config = () => configPromise ||= freshFetch(BASE + '/pages-config.json').then(r => r.json());
 self.addEventListener('install', event => event.waitUntil(self.skipWaiting()));
 self.addEventListener('activate', event => event.waitUntil(self.clients.claim()));
 
@@ -81,7 +83,7 @@ async function filtered(params, collection) {
   const collectionId = query.match(/collectionid:product=(\d+)/);
   collection ||= conf.collections[collectionId?.[1]];
   if (collection) {
-    const response = await fetch(BASE + '/data/collection-' + encodeURIComponent(collection) + '.json');
+    const response = await freshFetch(BASE + '/data/collection-' + encodeURIComponent(collection) + '.json');
     const raw = response.ok ? await response.json() : {products: []};
     const ids = new Set(raw.products.map(p => p.id));
     products = products.filter(p => ids.has(p.id));
@@ -151,16 +153,16 @@ async function handle(request) {
   if (path.startsWith('/collections/') && path.includes('/products/')) path = '/products/' + path.split('/').pop();
   if (path.startsWith('/checkouts/')) path = '/checkout';
   if (/^\d+$/.test(url.searchParams.get('page') || '')) {
-    const paged = await fetch(BASE + path + '/__page_' + url.searchParams.get('page') + '/index.html');
+    const paged = await freshFetch(BASE + path + '/__page_' + url.searchParams.get('page') + '/index.html');
     if (paged.ok) return paged;
   }
   // Fetch the actual HTML file. Returning a directory redirect from a worker
   // would fail navigations whose redirect mode is manual (e.g. /checkout).
   const resource = path === '/' ? '/index.html' : /\.[^/]+$/.test(path) ? path : path + '/index.html';
-  const response = await fetch(BASE + resource + url.search);
+  const response = await freshFetch(BASE + resource + url.search);
   if (response.status === 404 && path.startsWith('/assets/')) {
     const original = path.replace(/_(?:pico|icon|thumb|small|compact|medium|large|grande|master|\d+x\d*)(?:_crop_[a-z]+)?(?=\.[^.]+$)/, '');
-    if (original !== path) return fetch(BASE + original);
+    if (original !== path) return freshFetch(BASE + original);
   }
   return response;
 }
